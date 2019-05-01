@@ -1,0 +1,35 @@
+footer {
+    position: relative;
+    line-height: 24px;
+    flex: 1;
+    padding: 18px 0px 0px 0px;
+    z-index: 0;
+    background-color: rgba(0, 100, 176, 1);
+    color: #fafafa;
+    font-weight: 300;
+  }
+
+  footer a {
+    color: #d4c5c5;
+    font-weight: 300;
+    text-decoration: none;
+    z-index: 20;
+    position: relative;
+    cursor: pointer;
+  }
+  footer a:hover {
+    text-decoration: underline;
+  }
+
+
+
+
+  .footer-bottom{
+      background: rgba(0, 100, 176, 1);
+      padding:14px;
+      text-align: center;
+  }
+  .footer-bottom span {
+    color: #fafafa;
+    margin: 10px 0 5px;
+  }

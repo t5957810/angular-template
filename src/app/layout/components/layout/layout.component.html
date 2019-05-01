@@ -1,0 +1,16 @@
+<app-navbar [isMobile]="isMobile$ | async" [menuList]="menuList$ | async" [menu]="snav"></app-navbar>
+<mat-sidenav-container>
+
+  <!-- 左側選單 -->
+  <mat-sidenav #snav [mode]="(isMobile$ | async) ? 'over' : 'side'" [fixedInViewport]="!isMobile$ | async">
+    <app-menu [menu]="snav" [menuList]="menuList$ | async"></app-menu>
+  </mat-sidenav>
+
+  <!-- 內容部分 -->
+  <mat-sidenav-content>
+    <section class="sidenav-content">
+      <router-outlet></router-outlet>
+    </section>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+<app-footer></app-footer>

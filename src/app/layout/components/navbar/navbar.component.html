@@ -1,0 +1,46 @@
+<mat-toolbar color="primary" class="toolbar">
+  <mat-toolbar-row>
+
+    <!-- 手機版-->
+    <ng-container *ngIf="isMobile; else desktop">
+      <button class="hamburger mat-button" mat-button (click)="menu.toggle()">
+        <mat-icon class="mat-icon" aria-hidden="true">menu</mat-icon>
+        <div class="mat-button-ripple mat-ripple" matripple=""></div>
+        <div class="mat-button-focus-overlay"></div>
+      </button>
+      <h1 style="outline: 0px;" pointer dark-grey-text margin-left [routerLink]="['/']"> Flower Price
+              Forecast</h1>
+    </ng-container>
+
+    <!-- 電腦版-->
+    <ng-template #desktop>
+      <div class="container">
+
+        <div class="row justify-content-center">
+          <a style="padding: 14px 12px 14px 12px;">
+            <h1 style="outline: 0px;" pointer dark-grey-text margin-left [routerLink]="['/']">Flower Price
+              Forecast</h1>
+          </a>
+
+          <ng-container *ngFor="let item of menuList">
+            <button *ngIf="item.subMenus.length == 0; else hasSubMenus" [routerLink]="item.actionUrl" class="link-button"
+              mat-button>
+              {{ item.display }}
+            </button>
+            <ng-template #hasSubMenus>
+              <button class="link-button" [matMenuTriggerFor]="sub_menu" mat-button>
+                {{ item.display }}
+                <mat-icon>keyboard_arrow_down</mat-icon>
+              </button>
+              <mat-menu #sub_menu="matMenu" [overlapTrigger]="false">
+                <button *ngFor="let submenu of item.subMenus;" [routerLink]="submenu.actionUrl" mat-menu-item>
+                  {{ submenu.display }}
+                </button>
+              </mat-menu>
+            </ng-template>
+          </ng-container>
+        </div>
+      </div>
+    </ng-template>
+  </mat-toolbar-row>
+</mat-toolbar>

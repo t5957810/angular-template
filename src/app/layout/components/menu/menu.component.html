@@ -1,0 +1,24 @@
+<mat-nav-list style="padding-top:0px;">
+  <mat-accordion>
+    <ng-container *ngFor="let item of menuList">
+      <a mat-list-item (click)="menu.toggle()" class="mat-list-item-border"
+      *ngIf="item.subMenus.length == 0; else hasSubMenus" [routerLink]="item.actionUrl">
+        {{ item.display }}
+      </a>
+      <ng-template #hasSubMenus>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title m-f style="line-height: 30px;">
+              <span>{{ item.display }}</span>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <ng-container *ngFor="let submenu of item.subMenus">
+            <a mat-list-item m-f (click)="menu.toggle()" [routerLink]="submenu.actionUrl">
+              {{ submenu.display }}
+            </a>
+          </ng-container>
+        </mat-expansion-panel>
+      </ng-template>
+    </ng-container>
+  </mat-accordion>
+</mat-nav-list>

@@ -1,0 +1,53 @@
+[dark-grey-text] {
+  color: #3e3e3e;
+}
+
+/* 漢堡menu 樣式 */
+.hamburger {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    transition-duration: .4s;
+    color: #3e3e3e;
+    &:focus {
+      outline:0px;
+    }
+}
+
+/* LOGO */
+.link.home {
+  cursor: pointer;
+  margin: 0 32px 0 0;
+  padding: 21px 0;
+}
+
+/* header 樣式 */
+.toolbar {
+  position: fixed;
+  z-index: 2;
+  box-shadow: 0 8px 20px 0 rgba(218,224,235,.6);
+  min-height: 60px;
+}
+mat-toolbar-row{
+  background: #fff;
+  height: 60px;
+  padding: 0; /* 讓漢堡menu左側不會有多的距離 */
+}
+
+button{
+  outline:0px;
+  color: #3e3e3e;
+}
+.link-button {
+  height: 100%;
+  padding: 14px 12px 14px 12px;
+  font-size: 1rem;
+  &:hover {
+    color: #4a8bfc;
+  }
+}
+.mat-menu-item {
+  transition-duration: .4s;
+}
+
+
