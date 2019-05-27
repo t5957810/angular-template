@@ -25,6 +25,18 @@ export class CoreService {
       },
       {
         menuId: 2,
+        parentMenuId: 1,
+        actionUrl: '/css',
+        menuName: '',
+        menuNameC: '',
+        display: 'CSS',
+        dispSeq: 1,
+        isLeaf: 'Y',
+        level: 0,
+        subMenus: []
+      },
+      {
+        menuId: 3,
         parentMenuId: 2,
         actionUrl: '/charts',
         menuName: 'charts',

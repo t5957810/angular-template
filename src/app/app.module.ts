@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { LayoutModule } from './layout/layout.module';
-import { ChartsModule } from './feature/charts/charts.module';
+
 
 @NgModule({
   declarations: [
@@ -17,9 +17,7 @@ import { ChartsModule } from './feature/charts/charts.module';
     AppRoutingModule,         // AppRouting必須放在最後載入
     BrowserModule,
     HttpClientModule,         // import HttpClientModule after BrowserModule.
-    BrowserAnimationsModule, ChartsModule,
-
-
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
