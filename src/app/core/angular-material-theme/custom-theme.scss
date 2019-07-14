@@ -36,10 +36,12 @@ button {
     box-shadow: none !important;
     border-radius: 6px !important;
 }
+
 [ios-button] {
     box-shadow: none !important;
     border-radius: 10px !important;
 }
+
 [ios-lg-button] {
     height: 3em;
     line-height: 3em !important;
@@ -91,7 +93,7 @@ button {
 // 下拉選單和menu的彈出陰影改淡
 .mat-select-panel:not([class*=mat-elevation-z]),
 .mat-menu-panel {
-    box-shadow: 0 0.5rem 1rem 0 rgba(44, 51, 73, .1) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, .12) !important;
 }
 
 // toggle 底下
@@ -138,6 +140,12 @@ button {
 .mat-bottom-sheet-container {
     border-top-left-radius: $ios-border-radius !important;
     border-top-right-radius: $ios-border-radius !important;
+}
+
+@media screen and (max-width: 960px) {
+    .mat-bottom-sheet-container {
+        min-width: 90vw !important;
+    }
 }
 
 .mat-bottom-sheet-container-large,
