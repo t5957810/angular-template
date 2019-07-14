@@ -13,6 +13,7 @@ import { BottomSheetComponent } from './bottom-sheet/bottom-sheet.component';
 import { BottomSheetOverviewSheetComponent } from './bottom-sheet/bottom-sheet-overview-sheet/bottom-sheet-overview-sheet.component';
 import { AlertDialogComponent } from './alert-dialog/alert-dialog.component';
 import { ConfirmDialogComponent } from './alert-dialog/confirm-dialog/confirm-dialog.component';
+import { ButtonComponent } from './button/button.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ConfirmDialogComponent } from './alert-dialog/confirm-dialog/confirm-di
     BottomSheetComponent,
     BottomSheetOverviewSheetComponent,
     AlertDialogComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    ButtonComponent
   ],
   entryComponents: [
     BottomSheetOverviewSheetComponent,

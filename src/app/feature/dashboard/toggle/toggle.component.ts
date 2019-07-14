@@ -16,7 +16,8 @@ export class ToggleComponent implements OnInit {
       subscribeAngular: [],
       disabledToggleTrue: [{disabled: true, value: 'true'}],
       disabledToggle: [{disabled: true, value: ''}],
-      subscribeNgRx: [],
+      colorAccent: [],
+      colorWarn: [],
     });
   }
 

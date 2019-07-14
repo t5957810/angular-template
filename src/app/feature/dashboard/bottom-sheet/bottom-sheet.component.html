@@ -1,6 +1,7 @@
 <mat-card>
     <mat-card-content>
         <h2>iOS style action-sheet</h2>
-        <button mat-raised-button color="primary"  (click)="openBottomSheet()">打開Bottom Sheet </button>
+        <button mat-raised-button ios-button color="primary"  (click)="openBottomSheet()">打開Bottom Sheet </button>
+        <p *ngIf="chooseAction">選擇的動作：{{ chooseAction }}</p>
     </mat-card-content>
 </mat-card>

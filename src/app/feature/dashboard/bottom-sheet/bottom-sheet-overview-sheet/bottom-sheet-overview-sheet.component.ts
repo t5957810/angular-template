@@ -12,8 +12,7 @@ export class BottomSheetOverviewSheetComponent implements OnInit {
 
   ngOnInit() {
   }
-  openLink(event: MouseEvent): void {
-    this.bottomSheetRef.dismiss();
-    event.preventDefault();
+  openLink(action: string = null): void {
+    this.bottomSheetRef.dismiss(action);
   }
 }

@@ -1,7 +1,7 @@
 <mat-card>
     <mat-card-content>
         <form [formGroup]="radioForm">
-            <h2>radio</h2>
+            <h2>Radio button</h2>
             <mat-radio-group formControlName="angularMaterialLikeScore">
                 <mat-radio-button color="primary" [value]="1">超討厭</mat-radio-button>
                 <mat-radio-button color="primary" [value]="2">討厭</mat-radio-button>
@@ -9,5 +9,6 @@
                 <mat-radio-button color="primary" [value]="4">喜歡</mat-radio-button>
             </mat-radio-group>
         </form>
+        <mat-hint>說明：ios的radio button沒有icon，只有在選取時出現勾勾，這種設計不適合網頁。</mat-hint>
     </mat-card-content>
 </mat-card>

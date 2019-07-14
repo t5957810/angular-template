@@ -2,7 +2,7 @@
     <mat-card-content>
         <form [formGroup]="checkboxForm">
             <div formGroupName="mainQuestions">
-                <h2>圓形 Checkbox (iOS style)</h2>
+                <h2>Checkbox (iOS style)</h2>
                 <mat-checkbox formControlName="payForAll" [indeterminate]="selectedAll" (change)="checkAllChange($event)">
                     全選
                 </mat-checkbox>
@@ -11,5 +11,6 @@
                 <mat-checkbox formControlName="payForMovie" (change)="payForChange()">電影</mat-checkbox>
             </div>
         </form>
+        <mat-hint>說明：ios的checkbox為圓形，原本是26px，不過放在網頁上太大了，所以稍微調小一些。</mat-hint>
     </mat-card-content>
 </mat-card>

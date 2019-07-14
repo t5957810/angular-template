@@ -30,6 +30,24 @@ button {
     }
 }
 
+[ios-sm-button] {
+    height: 2em;
+    line-height: 2em !important;
+    box-shadow: none !important;
+    border-radius: 6px !important;
+}
+[ios-button] {
+    box-shadow: none !important;
+    border-radius: 10px !important;
+}
+[ios-lg-button] {
+    height: 3em;
+    line-height: 3em !important;
+    box-shadow: none !important;
+    border-radius: 12px !important;
+}
+
+
 .mat-hint {
     font-family: Microsoft JhengHei;
 }
@@ -43,19 +61,20 @@ button {
     border-radius: 50% !important;
 }
 
+// 把正方形改為圓形
 .mat-checkbox-frame {
     border-radius: 50% !important;
 }
 
 // checkbox圓形大小
 .mat-checkbox-inner-container {
-    height: 20px !important;
-    width: 20px !important;
+    height: 23px !important;
+    width: 23px !important;
 }
 
 // checkbox 箭頭長度
 .mat-checkbox-checkmark-path {
-    stroke-dasharray: 20 !important;
+    stroke-dasharray: 19 !important;
 }
 
 // checkbox 間距
@@ -80,6 +99,7 @@ button {
     width: 50px !important;
     height: 30px !important;
     border-radius: $standard-width-size !important;
+    background-color: #e2dddd;
 }
 
 // toggle 圓形container 位置
@@ -103,7 +123,8 @@ button {
 
 // 小圓點按鈕顏色
 .mat-slide-toggle.mat-primary.mat-checked .mat-slide-toggle-thumb,
-.mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+.mat-slide-toggle.mat-checked .mat-slide-toggle-thumb,
+.mat-slide-toggle.mat-warn.mat-checked .mat-slide-toggle-thumb {
     background-color: #fff;
 }
 
@@ -118,23 +139,27 @@ button {
     border-top-left-radius: $ios-border-radius !important;
     border-top-right-radius: $ios-border-radius !important;
 }
+
 .mat-bottom-sheet-container-large,
 .mat-bottom-sheet-container-medium,
 .mat-bottom-sheet-container-xlarge {
     border-top-left-radius: $ios-border-radius !important;
     border-top-right-radius: $ios-border-radius !important;
 }
+
 .mat-bottom-sheet-container {
     padding: 0px !important;
     margin-bottom: 8px;
     border-bottom-left-radius: 13px;
     border-bottom-right-radius: 13px;
 }
+
 [ios-action-sheet],
 .ios-action-sheet {
     padding-top: 0px !important;
     background: white;
 }
+
 [ios-action-sheet-item],
 .ios-action-sheet-item {
     text-align: center;
@@ -151,9 +176,11 @@ button {
 .mat-dialog-title {
     text-align: center;
 }
+
 .mat-dialog-container {
     border-radius: $ios-border-radius !important;
 }
+
 .mat-dialog-actions {
     border-top: 1px solid #ebeef2;
     margin-right: -24px;
@@ -171,6 +198,7 @@ button {
     height: 52px;
     color: #4792ff;
 }
+
 [ios-alert-action-left],
 .ios-alert-action-left {
     border-right: 1px solid #ebeef2 !important;
