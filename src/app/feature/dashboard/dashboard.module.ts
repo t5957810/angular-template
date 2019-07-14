@@ -9,12 +9,30 @@ import { ToggleComponent } from './toggle/toggle.component';
 import { MenuComponent } from './menu/menu.component';
 import { CardComponent } from './card/card.component';
 import { PanelComponent } from './panel/panel.component';
+import { BottomSheetComponent } from './bottom-sheet/bottom-sheet.component';
+import { BottomSheetOverviewSheetComponent } from './bottom-sheet/bottom-sheet-overview-sheet/bottom-sheet-overview-sheet.component';
+import { AlertDialogComponent } from './alert-dialog/alert-dialog.component';
+import { ConfirmDialogComponent } from './alert-dialog/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
-  declarations: [DashboardComponent, CheckboxComponent, RadioComponent, SelectComponent, ToggleComponent, MenuComponent, CardComponent, PanelComponent],
-  imports: [
-    CommonSharedModule,
-    DashboardRoutingModule
-  ]
+  declarations: [
+    DashboardComponent,
+    CheckboxComponent,
+    RadioComponent,
+    SelectComponent,
+    ToggleComponent,
+    MenuComponent,
+    CardComponent,
+    PanelComponent,
+    BottomSheetComponent,
+    BottomSheetOverviewSheetComponent,
+    AlertDialogComponent,
+    ConfirmDialogComponent
+  ],
+  entryComponents: [
+    BottomSheetOverviewSheetComponent,
+    ConfirmDialogComponent
+  ],
+  imports: [CommonSharedModule, DashboardRoutingModule]
 })
-export class DashboardModule { }
+export class DashboardModule {}

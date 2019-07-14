@@ -5,11 +5,13 @@ $custom-accent: mat-palette($mat-orange, 500);
 $custom-theme: mat-light-theme($custom-primary, $custom-accent);
 @include angular-material-theme($custom-theme);
 
-$standard-font-size: 16px;              // 標準字體大小
-$standard-width-size: 16px;             // 標準寬度
-$standard-half-width: 8px;              // 一半寬度
-$standard-font: Microsoft JhengHei;     // 標準字型
-$standard-border-radius : 8px;          // 標準字圓角
+$standard-font-size: 16px; // 標準字體大小
+$standard-width-size: 16px; // 標準寬度
+$standard-half-width: 8px; // 一半寬度
+$standard-font: Microsoft JhengHei; // 標準字型
+$standard-border-radius : 8px; // 標準字圓角
+$ios-border-radius : 13px; // ios圓角
+$ios-blue-color: #4792ff;
 
 .mat-ink-bar {
     height: 4px;
@@ -21,6 +23,7 @@ $standard-border-radius : 8px;          // 標準字圓角
         outline: 0px;
     }
 }
+
 button {
     &:focus {
         outline: 0px;
@@ -39,18 +42,22 @@ button {
 .mat-checkbox-background {
     border-radius: 50% !important;
 }
+
 .mat-checkbox-frame {
     border-radius: 50% !important;
 }
+
 // checkbox圓形大小
 .mat-checkbox-inner-container {
     height: 20px !important;
     width: 20px !important;
 }
+
 // checkbox 箭頭長度
 .mat-checkbox-checkmark-path {
     stroke-dasharray: 20 !important;
 }
+
 // checkbox 間距
 .mat-checkbox-layout {
     margin-right: $standard-half-width;
@@ -63,8 +70,9 @@ button {
 }
 
 // 下拉選單和menu的彈出陰影改淡
-.mat-select-panel:not([class*=mat-elevation-z]), .mat-menu-panel {
-   box-shadow: 0 0.5rem 1rem 0 rgba(44,51,73,.1) !important; 
+.mat-select-panel:not([class*=mat-elevation-z]),
+.mat-menu-panel {
+    box-shadow: 0 0.5rem 1rem 0 rgba(44, 51, 73, .1) !important;
 }
 
 // toggle 底下
@@ -73,6 +81,7 @@ button {
     height: 30px !important;
     border-radius: $standard-width-size !important;
 }
+
 // toggle 圓形container 位置
 .mat-slide-toggle-thumb-container {
     top: 1px !important;
@@ -80,15 +89,18 @@ button {
     width: 28px !important;
     height: 28px !important;
 }
+
 // toggle 圓形
 .mat-slide-toggle-thumb {
     width: 28px !important;
     height: 28px !important;
 }
+
 // 打開時圓形按鈕滑動距離
 .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb-container {
-    transform: translate3d(20px,0,0) !important;
+    transform: translate3d(20px, 0, 0) !important;
 }
+
 // 小圓點按鈕顏色
 .mat-slide-toggle.mat-primary.mat-checked .mat-slide-toggle-thumb,
 .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
@@ -97,8 +109,73 @@ button {
 
 
 .mat-expansion-panel:not([class*=mat-elevation-z]) {
-    box-shadow: 0 4px 16px rgba(0,0,0,.12);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, .12);
 }
+
+
+// // ios bottom-sheet
+.mat-bottom-sheet-container {
+    border-top-left-radius: $ios-border-radius !important;
+    border-top-right-radius: $ios-border-radius !important;
+}
+.mat-bottom-sheet-container-large,
+.mat-bottom-sheet-container-medium,
+.mat-bottom-sheet-container-xlarge {
+    border-top-left-radius: $ios-border-radius !important;
+    border-top-right-radius: $ios-border-radius !important;
+}
+.mat-bottom-sheet-container {
+    padding: 0px !important;
+    margin-bottom: 8px;
+    border-bottom-left-radius: 13px;
+    border-bottom-right-radius: 13px;
+}
+[ios-action-sheet],
+.ios-action-sheet {
+    padding-top: 0px !important;
+    background: white;
+}
+[ios-action-sheet-item],
+.ios-action-sheet-item {
+    text-align: center;
+    border-bottom: 1px solid #ebeef2;
+    color: $ios-blue-color !important;
+
+    &:last-child {
+        border-bottom: 0px;
+    }
+}
+
+
+// ios dialog
+.mat-dialog-title {
+    text-align: center;
+}
+.mat-dialog-container {
+    border-radius: $ios-border-radius !important;
+}
+.mat-dialog-actions {
+    border-top: 1px solid #ebeef2;
+    margin-right: -24px;
+    margin-left: -24px;
+    margin-top: 0px;
+    padding: 0px !important;
+}
+
+// ios alert action 按鈕
+[ios-alert-action],
+.ios-alert-action {
+    width: 50%;
+    padding: 0px;
+    margin: 0px !important;
+    height: 52px;
+    color: #4792ff;
+}
+[ios-alert-action-left],
+.ios-alert-action-left {
+    border-right: 1px solid #ebeef2 !important;
+}
+
 
 
 // iOS風格圓角淡陰影卡片
@@ -107,5 +184,5 @@ button {
     border-top-right-radius: $standard-border-radius;
     border-bottom-left-radius: $standard-border-radius;
     border-bottom-right-radius: $standard-border-radius;
-    box-shadow: 0 4px 16px rgba(0,0,0,.12);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, .12);
 }

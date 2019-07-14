@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>刪除確認 ?</h1>
+<div mat-dialog-content>
+  <p text-center>確定要刪除此信用卡資訊？</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button ios-alert-action ios-alert-action-left mat-dialog-close>否</button>
+  <button mat-button (click)="onConfirm()" ios-alert-action>是</button>
+</div>

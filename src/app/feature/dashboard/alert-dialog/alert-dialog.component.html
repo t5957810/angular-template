@@ -1,0 +1,7 @@
+<mat-card>
+    <mat-card-content>
+        <h2>iOS style alert</h2>
+        <button mat-raised-button color="primary"  (click)="openDialog()">打開Alert Dialog </button>
+        <p *ngIf="isChooseConfirm">isChooseConfirm: {{ isChooseConfirm }}</p>
+    </mat-card-content>
+</mat-card>
