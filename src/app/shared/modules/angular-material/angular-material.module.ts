@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
-import { MatButtonModule, MatCheckboxModule, MAT_LABEL_GLOBAL_OPTIONS, MatSnackBarModule, MAT_DATE_FORMATS,
-  MatTreeModule,
-  MAT_DATE_LOCALE} from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule, MAT_CHECKBOX_CLICK_ACTION } from '@angular/material/checkbox';
+import { MAT_LABEL_GLOBAL_OPTIONS, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTreeModule } from '@angular/material/tree';
 import {CdkTableModule} from '@angular/cdk/table';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -94,6 +96,7 @@ export const TW_MONTH_FORMATS = {
     { provide: MAT_DATE_LOCALE, useValue: 'zh-TW' },
     { provide: MAT_DATE_FORMATS, useValue: TW_FORMATS },
     { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } },
+    // { provide: MAT_CHECKBOX_CLICK_ACTION, useValue: 'noop' },
   ]
 })
 export class AngularMaterialModule { }

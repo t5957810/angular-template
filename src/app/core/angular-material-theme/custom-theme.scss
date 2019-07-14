@@ -1,23 +1,27 @@
 @import '~@angular/material/theming';
 @include mat-core();
-
 $custom-primary: mat-palette($mat-light-blue, 500);
 $custom-accent: mat-palette($mat-orange, 500);
-
-
 $custom-theme: mat-light-theme($custom-primary, $custom-accent);
 @include angular-material-theme($custom-theme);
 
+$standard-font-size: 16px;              // 標準字體大小
+$standard-width-size: 16px;             // 標準寬度
+$standard-half-width: 8px;              // 一半寬度
+$standard-font: Microsoft JhengHei;     // 標準字型
+$standard-border-radius : 8px;          // 標準字圓角
 
 .mat-ink-bar {
     height: 4px;
 }
-.mat-tab-header{
-    border-top-left-radius: 8px !important;
-    border-top-right-radius: 8px !important;
-}
 
+// 按鈕移除按下時的編框
 .mat-button {
+    &:focus {
+        outline: 0px;
+    }
+}
+button {
     &:focus {
         outline: 0px;
     }
@@ -31,16 +35,77 @@ $custom-theme: mat-light-theme($custom-primary, $custom-accent);
     opacity: 1;
 }
 
-.mat-drawer-container{
-    // background-color: #eaeff6;
+// 把checkbox改成圓形
+.mat-checkbox-background {
+    border-radius: 50% !important;
+}
+.mat-checkbox-frame {
+    border-radius: 50% !important;
+}
+// checkbox圓形大小
+.mat-checkbox-inner-container {
+    height: 20px !important;
+    width: 20px !important;
+}
+// checkbox 箭頭長度
+.mat-checkbox-checkmark-path {
+    stroke-dasharray: 20 !important;
+}
+// checkbox 間距
+.mat-checkbox-layout {
+    margin-right: $standard-half-width;
 }
 
 
-// 圓角淡陰影卡片
+// radio 間距
+.mat-radio-label {
+    margin-right: $standard-half-width;
+}
+
+// 下拉選單和menu的彈出陰影改淡
+.mat-select-panel:not([class*=mat-elevation-z]), .mat-menu-panel {
+   box-shadow: 0 0.5rem 1rem 0 rgba(44,51,73,.1) !important; 
+}
+
+// toggle 底下
+.mat-slide-toggle-bar {
+    width: 50px !important;
+    height: 30px !important;
+    border-radius: $standard-width-size !important;
+}
+// toggle 圓形container 位置
+.mat-slide-toggle-thumb-container {
+    top: 1px !important;
+    left: 1px !important;
+    width: 28px !important;
+    height: 28px !important;
+}
+// toggle 圓形
+.mat-slide-toggle-thumb {
+    width: 28px !important;
+    height: 28px !important;
+}
+// 打開時圓形按鈕滑動距離
+.mat-slide-toggle.mat-checked .mat-slide-toggle-thumb-container {
+    transform: translate3d(20px,0,0) !important;
+}
+// 小圓點按鈕顏色
+.mat-slide-toggle.mat-primary.mat-checked .mat-slide-toggle-thumb,
+.mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+    background-color: #fff;
+}
+
+
+.mat-expansion-panel:not([class*=mat-elevation-z]) {
+    box-shadow: 0 4px 16px rgba(0,0,0,.12);
+}
+
+
+// iOS風格圓角淡陰影卡片
 .mat-card:not([class*='mat-elevation-z']) {
-    border-top-left-radius: 16px;
-    border-top-right-radius: 16px;
-    border-bottom-left-radius: 16px;
-    border-bottom-right-radius: 16px;
-    box-shadow: 0 6px 15px rgba(36,37,38,0.08);
+    border-top-left-radius: $standard-border-radius;
+    border-top-right-radius: $standard-border-radius;
+    border-bottom-left-radius: $standard-border-radius;
+    border-bottom-right-radius: $standard-border-radius;
+    box-shadow: 0 4px 16px rgba(0,0,0,.12);
 }

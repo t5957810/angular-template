@@ -1,0 +1,15 @@
+<mat-card>
+    <mat-card-content>
+        <form [formGroup]="checkboxForm">
+            <div formGroupName="mainQuestions">
+                <h2>圓形 Checkbox</h2>
+                <mat-checkbox formControlName="payForAll" [indeterminate]="selectedAll" (change)="checkAllChange($event)">
+                    全選
+                </mat-checkbox>
+                <mat-checkbox formControlName="payForBook" (change)="payForChange()">書籍</mat-checkbox>
+                <mat-checkbox formControlName="payForMusic" (change)="payForChange()">音樂</mat-checkbox>
+                <mat-checkbox formControlName="payForMovie" (change)="payForChange()">電影</mat-checkbox>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>

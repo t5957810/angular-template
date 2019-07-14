@@ -1,0 +1,31 @@
+<mat-card>
+    <mat-card-content>
+        <h2>panel</h2>
+        <mat-accordion>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Personal data
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Type your name and age
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="row justify-content-center">
+                    <mat-spinner [strokeWidth]="5" [diameter]="40"></mat-spinner>
+                </div>
+            </mat-expansion-panel>
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Self aware panel
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Currently I am {{panelOpenState ? 'open' : 'closed'}}
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <p>I'm visible because I am open</p>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </mat-card-content>
+</mat-card>

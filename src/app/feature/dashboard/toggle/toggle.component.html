@@ -1,0 +1,19 @@
+<mat-card>
+    <mat-card-content>
+        <form [formGroup]="toggleForm">
+            <h2>toggle 開關(iOS Style)</h2>
+            <div>
+                <mat-slide-toggle formControlName="subscribeAngular" color="primary">Angular技巧全集</mat-slide-toggle>
+            </div>
+            <div margin-top>
+                <mat-slide-toggle formControlName="disabledToggleTrue">disabledToggleTrue</mat-slide-toggle>
+            </div>
+            <div margin-top>
+                <mat-slide-toggle formControlName="disabledToggle">disabledToggle</mat-slide-toggle>
+            </div>
+            <div margin-top>
+                <mat-slide-toggle formControlName="subscribeNgRx">NgRx入門班</mat-slide-toggle>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>

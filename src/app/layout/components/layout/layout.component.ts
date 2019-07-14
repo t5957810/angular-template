@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { MatSidenav } from '@angular/material';
+import { MatSidenav } from '@angular/material/sidenav';
 import { Subject, Observable } from 'rxjs';
 import { map, tap, takeUntil, share } from 'rxjs/operators';
 import { BreakpointObserver } from '@angular/cdk/layout';

@@ -1,0 +1,13 @@
+<mat-card>
+    <mat-card-content>
+        <form [formGroup]="radioForm">
+            <h2>radio</h2>
+            <mat-radio-group formControlName="angularMaterialLikeScore">
+                <mat-radio-button color="primary" [value]="1">超討厭</mat-radio-button>
+                <mat-radio-button color="primary" [value]="2">討厭</mat-radio-button>
+                <mat-radio-button color="primary" [value]="3">普通</mat-radio-button>
+                <mat-radio-button color="primary" [value]="4">喜歡</mat-radio-button>
+            </mat-radio-group>
+        </form>
+    </mat-card-content>
+</mat-card>
