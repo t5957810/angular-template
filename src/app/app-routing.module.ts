@@ -11,15 +11,15 @@ export const routes: Routes = [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       {
         path: 'dashboard',
-        loadChildren: './feature/dashboard/dashboard.module#DashboardModule'
+        loadChildren: () => import('./feature/dashboard/dashboard.module').then(m => m.DashboardModule)
       },
       {
         path: 'css',
-        loadChildren: './feature/css-design/css-design.module#CssDesignModule'
+        loadChildren: () => import('./feature/css-design/css-design.module').then(m => m.CssDesignModule)
       },
       {
         path: 'charts',
-        loadChildren: './feature/charts/charts.module#ChartsModule'
+        loadChildren: () => import('./feature/charts/charts.module').then(m => m.ChartsModule)
       },
     ]
   },

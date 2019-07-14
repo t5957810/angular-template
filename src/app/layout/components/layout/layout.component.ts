@@ -14,7 +14,7 @@ import { Menu } from 'src/app/core/model/interface/menu.interface';
 export class LayoutComponent implements OnInit, OnDestroy {
   isMobile$: Observable<boolean>;
   menuList$: Observable<Menu[]>;
-  @ViewChild('snav') snav: MatSidenav; // 左側選單
+  @ViewChild('snav', { static: true }) snav: MatSidenav; // 左側選單
   destory = new Subject();
   constructor(
     private breakpointObserver: BreakpointObserver,
