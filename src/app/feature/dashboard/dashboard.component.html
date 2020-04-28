@@ -54,9 +54,8 @@
                   <ng-container *ngSwitchCase="col.field === 'subject'">
                     <td [style.width]="col.width" tableContent>
                       <input type="text" pInputText required name="{{ rowData['uniqueOrder'] }}subject"
-                        style="width: 100%;"
-                        [(ngModel)]="rowData[col.field]" />
-                      <p error-text *ngIf="checkIsEmpty(rowData[col.field])">
+                        style="width: 100%;" [(ngModel)]="rowData[col.field]" />
+                      <p error-text *ngIf="checkEmpty(rowData[col.field])">
                         請輸入內容</p>
                     </td>
                   </ng-container>
@@ -64,7 +63,7 @@
                     <td [style.width]="col.width" tableContent>
                       <input type="text" pInputText required name="{{ rowData['uniqueOrder'] }}releaseDate"
                         [(ngModel)]="rowData[col.field]" />
-                      <p error-text *ngIf="checkIsEmpty(rowData[col.field])">
+                      <p error-text *ngIf="checkEmpty(rowData[col.field])">
                         請輸入日期</p>
                     </td>
                   </ng-container>
@@ -89,6 +88,136 @@
           </ng-template>
         </p-table>
       </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col" padding>
+      <button pButton type="button" icon="pi pi-undo" (click)="resetTree()" label="復原" class="ui-button-info"
+        margin-right></button>
+      <p-treeTable [columns]="refDocTableConfig.cols" [value]="treeValueList" [loading]="refDocTableConfig.isLoading"
+        [scrollable]="true">
+        <ng-template pTemplate="colgroup" let-columns>
+          <colgroup>
+            <col *ngFor="let col of columns" [width]='col.width'>
+          </colgroup>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th *ngFor="let col of columns">
+              {{col.header}}
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-columns="columns">
+          <tr>
+            <ng-container *ngFor="let col of columns; let i = index" [ngSwitch]="col.field">
+              <!-- 第 0 階 -->
+              <ng-container *ngIf="rowNode.level == 0 && rowData['isDelete'] !== true">
+                <ng-container *ngSwitchCase="'auditContent'">
+                  <td>
+                    <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+                    <button pButton icon="pi pi-plus" (click)="onCreateLevelOneRowData(rowNode)"></button>
+                  </td>
+                </ng-container>
+                <ng-container *ngSwitchCase="'docName'">
+                  <td tableContent>
+                    <a>
+                      {{rowData[col.field] }}
+                    </a>
+                  </td>
+                </ng-container>
+                <ng-container *ngSwitchDefault>
+                  <td tableContent>{{rowData[col.field] }}</td>
+                </ng-container>
+              </ng-container>
+
+              <!-- 第 1 階 -->
+              <ng-container *ngIf="rowNode.level == 1 && rowData['isDelete'] !== true">
+                <ng-container *ngSwitchCase="'auditContent'">
+                  <td>
+                    <textarea pInputTextarea [(ngModel)]="rowData[col.field]" style="min-height: 100px;"
+                      required></textarea>
+                    <p error-text *ngIf="checkIsEmpty(rowData.auditContent, rowData.required, 'auditContent')">
+                      請輸入稽核內容/項目</p>
+                  </td>
+                </ng-container>
+                <ng-container *ngSwitchCase="'imageAttachment'">
+                  <td [width]="col.width">
+                    <ng-container *ngIf="rowData.isAdd; else hasData">
+                      <p view-text>暫存後才可上傳附件圖</p>
+                    </ng-container>
+                  </td>
+                </ng-container>
+                <ng-container *ngSwitchCase="'auditResult'">
+                  <td>
+                    <textarea pInputTextarea [(ngModel)]="rowData[col.field]"
+                      *ngIf="rowData['regularAuditExecuteContentId']" style="min-height: 100px;"
+                      [required]="checkIsEmpty(rowData.auditResult, rowData.required, 'auditResult')"></textarea>
+                    <ng-container *ngIf="rowData.isAdd; else hasData">
+                      <p view-text>暫存後才可輸入稽核結果說明</p>
+                    </ng-container>
+                    <ng-template #hasData>
+                      <p error-text *ngIf="checkIsEmpty(rowData.auditResult, rowData.required, 'auditResult')">
+                        請輸入稽核結果說明</p>
+                    </ng-template>
+                  </td>
+                </ng-container>
+                <ng-container *ngSwitchCase="'auditJudgmentType'">
+                  <td>
+
+                    <ng-container *ngIf="rowData.isAdd; else hasDropdown">
+                      <p view-text>暫存後才可選擇稽核判定</p>
+                    </ng-container>
+                    <ng-template #hasDropdown>
+                      <p error-text
+                        *ngIf="checkIsEmpty(rowData.auditJudgmentType, rowData.required, 'auditJudgmentType')">
+                        請選擇稽核判定</p>
+                    </ng-template>
+                  </td>
+                </ng-container>
+                <ng-container *ngSwitchCase="'regularAuditIssue'">
+                  <td>
+                    <span pTooltip="編輯" tooltipPosition="top" *ngIf="rowData['regularAuditExecuteContentId']">
+                      <button pButton icon="pi pi-pencil"
+                        [disabled]="rowData['auditJudgmentType']==AUDIT_JUDGMENT_TYPE_PASS ||
+                                                    rowData['auditJudgmentType']== AUDIT_JUDGMENT_TYPE_NOJUDGMENT"></button>
+                    </span>
+                    <ng-container *ngIf="rowData.isAdd; else auditTaskIssue">
+                      <p view-text>暫存後才可編輯本次缺失</p>
+                    </ng-container>
+                    <ng-template #auditTaskIssue>
+                      <ng-container *ngIf="rowData['auditJudgmentType']==AUDIT_JUDGMENT_TYPE_UNPASS">
+                        <p error-text *ngIf="!rowNode.node.data.hasIssue">
+                          稽核判定為不符合或建議事項時，本次缺失要有項目</p>
+                      </ng-container>
+
+                    </ng-template>
+                  </td>
+                </ng-container>
+                <ng-container *ngSwitchCase="'docName'">
+                  <td text-center>{{rowData[col.field] }}
+                    <button pButton icon="pi pi-minus" class="ui-button-danger"
+                      (click)="onDeleteTreeRowData(rowNode)"></button>
+                  </td>
+                </ng-container>
+                <ng-container *ngSwitchDefault>
+                  <td>{{rowData[col.field] }}</td>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="paginatorright" let-state>
+          <span style="color: black">Total : {{state.totalRecords || 0}}</span>
+        </ng-template>
+        <ng-template pTemplate="emptymessage" let-columns>
+          <tr>
+            <td [attr.colspan]="columns.length">
+              No records found
+            </td>
+          </tr>
+        </ng-template>
+      </p-treeTable>
     </div>
   </div>
   <div class="row">
