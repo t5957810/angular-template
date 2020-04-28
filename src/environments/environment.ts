@@ -1,9 +1,16 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
+const projName = 'csr';
+const host = location.origin;
+const projApi = 'csr-api';
 
 export const environment = {
-  production: false
+  production: false,
+  local: true,
+  contentPath: host + '/' + projApi,
+  baseUrl: '/' + projName + '/',
+  envAreaName: '開發區',
 };
 
 /*

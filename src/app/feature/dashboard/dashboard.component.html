@@ -1,5 +1,96 @@
-
 <div class="container">
+  <div class="row">
+    <div class="col" padding>
+      <button pButton type="button" icon="pi pi-undo" (click)="reset()" label="復原" class="ui-button-info"
+        margin-right></button>
+      <form #f="ngForm">
+        <p-table #dt *ngIf="tableStructure" [columns]="tableConfig.cols" [value]="resultList"
+          [loading]="tableConfig.isLoading" [scrollable]="true">
+          <ng-template pTemplate="colgroup" let-columns>
+            <colgroup>
+              <col *ngFor="let col of tableConfig.cols" [width]='col.width'>
+            </colgroup>
+          </ng-template>
+          <ng-template pTemplate="header" let-columns>
+            <tr center>
+              <ng-container *ngFor="let col of columns">
+                <ng-container *ngIf="col.field ==='action';else normal">
+                  <th [style.width]="col.width">
+                    <button pButton type="button" icon="pi pi-plus" margin-bottom (click)="onCreateRowData()">
+                    </button>
+                  </th>
+                </ng-container>
+                <ng-template #normal>
+                  <th *ngIf="col.isSort" [pSortableColumn]="col.field">
+                    {{col.header}}
+                    <p-sortIcon [field]="col.field"></p-sortIcon>
+                  </th>
+                  <th *ngIf="!col.isSort" [style.width]="col.width">
+                    {{ col.header }}
+                  </th>
+                </ng-template>
+              </ng-container>
+            </tr>
+            <tr>
+              <th *ngFor="let col of columns" [ngSwitch]="col.field" [style.width]="col.width">
+                <p-dropdown *ngSwitchCase="'memoryType'" [options]="memoryType$ | async" appendTo="body"
+                  [autoDisplayFirst]="false" (onChange)="dt.filter($event.value, col.field, 'equals')"
+                  styleClass="ui-column-filter" [showClear]="true">
+                </p-dropdown>
+              </th>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="body" let-rowData let-columns="columns" let-rowIndex="rowIndex">
+            <tr>
+              <ng-container *ngFor="let col of columns">
+                <ng-container [ngSwitch]="true">
+                  <ng-container *ngSwitchCase="col.field === 'action'">
+                    <td [style.width]="col.width" tableContent>
+                      <button pButton icon="pi pi-minus" class="ui-button-danger"
+                        (click)="onDeleteRowData(rowData)"></button>
+                    </td>
+                  </ng-container>
+                  <ng-container *ngSwitchCase="col.field === 'subject'">
+                    <td [style.width]="col.width" tableContent>
+                      <input type="text" pInputText required name="{{ rowData['uniqueOrder'] }}subject"
+                        style="width: 100%;"
+                        [(ngModel)]="rowData[col.field]" />
+                      <p error-text *ngIf="checkIsEmpty(rowData[col.field])">
+                        請輸入內容</p>
+                    </td>
+                  </ng-container>
+                  <ng-container *ngSwitchCase="col.field === 'releaseDate'">
+                    <td [style.width]="col.width" tableContent>
+                      <input type="text" pInputText required name="{{ rowData['uniqueOrder'] }}releaseDate"
+                        [(ngModel)]="rowData[col.field]" />
+                      <p error-text *ngIf="checkIsEmpty(rowData[col.field])">
+                        請輸入日期</p>
+                    </td>
+                  </ng-container>
+                  <ng-container *ngSwitchDefault>
+                    <td [style.width]="col.width" tableContent>
+                      {{ rowData[col.field] }}
+                    </td>
+                  </ng-container>
+                </ng-container>
+              </ng-container>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="paginatorright" let-state>
+            <span style="color: black">Total : {{state.totalRecords || 0}}</span>
+          </ng-template>
+          <ng-template pTemplate="emptymessage" let-columns>
+            <tr>
+              <td [attr.colspan]="columns.length">
+                No records found
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </form>
+    </div>
+  </div>
   <div class="row">
     <div class="col">
       <app-checkbox></app-checkbox>

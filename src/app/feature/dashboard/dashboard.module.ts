@@ -35,6 +35,9 @@ import { ButtonComponent } from './button/button.component';
     BottomSheetOverviewSheetComponent,
     ConfirmDialogComponent
   ],
-  imports: [CommonSharedModule, DashboardRoutingModule]
+  imports: [
+    CommonSharedModule,
+    DashboardRoutingModule
+  ]
 })
-export class DashboardModule {}
+export class DashboardModule { }
