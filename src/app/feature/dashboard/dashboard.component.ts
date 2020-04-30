@@ -143,7 +143,10 @@ export class DashboardComponent implements OnInit {
       ['regularAuditRefDocList', 'regularAuditExecuteContentList'], ['regularAuditRefDocId', 'regularAuditExecuteContentId'],
       this.buildRequiredMapForSave());
     this.treeValueList = [...this.treeNodeStructure.treeResultList];
-    console.log(this.treeNodeStructure);
+  }
+
+  getTreeValue() {
+    console.log('returnList= ', this.treeNodeStructure.transformTreeListToOriginalList());
   }
 
   query() {

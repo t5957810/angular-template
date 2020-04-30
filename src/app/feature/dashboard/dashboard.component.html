@@ -94,6 +94,7 @@
     <div class="col" padding>
       <button pButton type="button" icon="pi pi-undo" (click)="resetTree()" label="復原" class="ui-button-info"
         margin-right></button>
+      <button pButton type="button" (click)="getTreeValue()" label="收值" class="ui-button-info" margin-right></button>
       <p-treeTable [columns]="refDocTableConfig.cols" [value]="treeValueList" [loading]="refDocTableConfig.isLoading"
         [scrollable]="true">
         <ng-template pTemplate="colgroup" let-columns>
@@ -178,20 +179,11 @@
                 <ng-container *ngSwitchCase="'regularAuditIssue'">
                   <td>
                     <span pTooltip="編輯" tooltipPosition="top" *ngIf="rowData['regularAuditExecuteContentId']">
-                      <button pButton icon="pi pi-pencil"
-                        [disabled]="rowData['auditJudgmentType']==AUDIT_JUDGMENT_TYPE_PASS ||
-                                                    rowData['auditJudgmentType']== AUDIT_JUDGMENT_TYPE_NOJUDGMENT"></button>
+                      <button pButton icon="pi pi-pencil"></button>
                     </span>
-                    <ng-container *ngIf="rowData.isAdd; else auditTaskIssue">
+                    <ng-container *ngIf="rowData.isAdd;">
                       <p view-text>暫存後才可編輯本次缺失</p>
                     </ng-container>
-                    <ng-template #auditTaskIssue>
-                      <ng-container *ngIf="rowData['auditJudgmentType']==AUDIT_JUDGMENT_TYPE_UNPASS">
-                        <p error-text *ngIf="!rowNode.node.data.hasIssue">
-                          稽核判定為不符合或建議事項時，本次缺失要有項目</p>
-                      </ng-container>
-
-                    </ng-template>
                   </td>
                 </ng-container>
                 <ng-container *ngSwitchCase="'docName'">

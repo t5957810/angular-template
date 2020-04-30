@@ -7,7 +7,7 @@ export class TreeNodeStructure {
     private _treeResultList: TreeNode[] = [];        // 給TreeTable用的 TreeList
     private _originalList: any[] = [];
     private _expandedAll: boolean;              // 是否要展開全部的tree
-    private _levelMap = new Map<number, string>();
+    private _levelMap = new Map<number, string>(); // 階層與陣列名稱對應Map，從第 0 階開始算
     private _idMap = new Map<number, string>(); // 每一層的id
     private _requiredMap = new Map<number, string[]>();
     private _childRequired: boolean;
@@ -15,13 +15,13 @@ export class TreeNodeStructure {
 
 
     constructor(originalList: any, childrenNameList: string[], idList: string[], requiredMap = null,
-        childRequired = false, expandedAll = true) {
+                childRequired = false, expandedAll = true) {
         this._originalList = _.cloneDeep(originalList);
         this._childrenNameList = childrenNameList;
         this._idList = idList;
         this._requiredMap = requiredMap;
-        this.buildLevelMap();
         this._expandedAll = expandedAll;
+        this.buildLevelMap();
         this.buildTreeNodeList(this._originalList);
         this._childRequired = childRequired;
     }
@@ -67,9 +67,9 @@ export class TreeNodeStructure {
                 }
 
                 // 第 1 階
-                for (const [i, nextLevelLo] of lo.children.entries()) {
+                lo.children.forEach((nextLevelLo, i) => {
                     nextLevelLo.data.required = this._requiredMap.get(level);
-                }
+                });
             });
         }
     }
@@ -112,23 +112,23 @@ export class TreeNodeStructure {
                 // 是否有第 1 階
                 level = level + 1;
                 if (_.isEmpty(lo[this._levelMap.get(level)])) {
-                    this._treeResultList.push(row);
+                    this._treeResultList = [...this._treeResultList, row];
                     return;
                 }
 
                 // 第 1 階
-                for (const [i, nextLevelLo] of lo[this._levelMap.get(level)].entries()) {
+                lo[this._levelMap.get(level)].forEach((nextLevelLo, i) => {
                     const nextRow = this.setDataChildren(nextLevelLo, i, level);
-                    row['children'] = [...row['children'], nextRow];
-                }
-                this._treeResultList.push(row);
+                    row.children = [...row.children, nextRow];
+                });
+                this._treeResultList = [...this._treeResultList, row];
             });
         }
     }
 
     private reOrderIndex(list: any): void {
         list.forEach((lo: any, index: number) => {
-            lo['index'] = index + 1;
+            lo.index = index + 1;
         });
     }
 
@@ -138,13 +138,13 @@ export class TreeNodeStructure {
 
         if (rowNode) {
             data = this.setDataChildren(eachLevelLo, rowNode.node.children.length, (rowNode.level + 1), true);
-            rowNode.node.children.push(data);
+            rowNode.node.children = [...rowNode.node.children, data];
             return;
         }
 
         // 沒有node 代表為新增第0階頭的資料
         data = this.setDataChildren(eachLevelLo, this._treeResultList.length, 0, true);
-        this._treeResultList.push(data);
+        this._treeResultList = [...this._treeResultList, data];
     }
 
 
@@ -152,18 +152,13 @@ export class TreeNodeStructure {
     deleteRowData(rowNode: any): void {
         // 有id 表示原本的資料，刪除時要把isDelete 設為 true
         if (rowNode.node.data[this._idMap.get(rowNode.level)]) {
-            rowNode.node.data['isDelete'] = true;
+            rowNode.node.data.isDelete = true;
             // 有第 1 階的話也要一併調整 isDelete
             if (!_.isEmpty(rowNode.node.children)) {
                 rowNode.node.children.forEach(element => {
-                    element.data['isDelete'] = true;
+                    element.data.isDelete = true;
                 });
             }
-            // 若為第0階
-            if (rowNode.level === 0) {
-             // TODO:
-            }
-
             return;
         }
 
@@ -191,7 +186,7 @@ export class TreeNodeStructure {
     // 將Tree結構轉回原始後端陣列結構
     transformTreeListToOriginalList(isCheckChildRequired = false) {
         this.hasError = {};
-        const returnList = [];
+        let returnList = [];
         if (_.isEmpty(this._treeResultList)) {
             return [];
         }
@@ -206,7 +201,7 @@ export class TreeNodeStructure {
                     if (this.checkIsEmpty(value)) {
                         row.data.error = true;
                         this.hasError['level' + level] = [];
-                        this.hasError['level' + level].push(lo);
+                        this.hasError['level' + level] = [...this.hasError['level' + level], lo];
                         return;
                     }
                     row.data.error = false;
@@ -221,31 +216,31 @@ export class TreeNodeStructure {
                 return treeNode.data.isDelete !== true;
             })))) {
                 row.data.error = true;
-                this.hasError['childRequiredError'] = true;
+                this.hasError.childRequiredError = true;
             }
 
             if (_.isEmpty(row.children)) {
-                returnList.push(lo);
+                returnList = [...returnList, lo];
                 return;
             }
 
             // 第 1 階
-            for (const [i, nextLevelLo] of row.children.entries()) {
+            row.children.forEach((nextLevelLo, i) => {
                 const nextLo = this.copyProperties(nextLevelLo.data, {});
                 _.mapValues(nextLo, (value, key) => {
                     if (nextLo.required !== null && _.includes(nextLo.required, key)) {
                         if (this.checkIsEmpty(value)) {
                             nextLevelLo.data.error = true;
                             this.hasError['level' + level] = [];
-                            this.hasError['level' + level].push(nextLo);
+                            this.hasError['level' + level] = [...this.hasError['level' + level], nextLo];
                             return;
                         }
                         nextLevelLo.data.error = false;
                     }
                 });
-                lo[this._levelMap.get(level)].push(nextLo);
-            }
-            returnList.push(lo);
+                lo[this._levelMap.get(level)] = [...lo[this._levelMap.get(level)], nextLo];
+            });
+            returnList = [...returnList, lo];
         });
 
         if (!_.isEmpty(this.hasError)) {
